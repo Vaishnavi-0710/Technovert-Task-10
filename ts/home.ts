@@ -1,6 +1,5 @@
 import { IContacts } from "./model";
 import { AddressBookService } from "./services";
-import {contacts} from "./services" ;
 let mode:string;
 
 export let counter=0;
@@ -8,7 +7,7 @@ let contactList:string;
 let obj= new AddressBookService();
 
 function contactNotNull(){
-    if(contacts!=null){
+    if(obj.contacts!=null){
         displayDetails(counter);
     }
 }
@@ -41,7 +40,7 @@ $(document).ready(function(){
                 });
 
             };
-            localStorage.setItem('contacts', JSON. stringify(contacts));
+            localStorage.setItem('contacts', JSON. stringify(obj.contacts));
             display();
             $(".form-wrapper").hide();
             $("#formDetails").trigger("reset");
@@ -68,9 +67,9 @@ $(document).ready(function(){
                     address: <string>$('#address').val()
                 });
                 $(".form-wrapper").hide();
-                localStorage.setItem('contacts', JSON.stringify(contacts));
+                localStorage.setItem('contacts', JSON.stringify(obj.contacts));
                 display();
-                alert(contacts[counter].name+"'s data is updated");
+                alert(obj.contacts[counter].name+"'s data is updated");
                 contactNotNull();
             }
         }
@@ -93,12 +92,12 @@ $(document).ready(function(){
     $('#delete').click(function(e){
         e.preventDefault();
         if(confirm("Are you sure you want to delete the contact?")==true){
-            contacts.splice(counter,1);
+            obj.contacts.splice(counter,1);
             $('.detailed-contact').css("display","none");
-            localStorage.setItem('contacts', JSON.stringify(contacts));
+            localStorage.setItem('contacts', JSON.stringify(obj.contacts));
             obj.AddressBookService();
             display();
-            if(contacts!=null){
+            if(obj.contacts!=null){
                 displayDetails(counter-counter);
             }
         }
@@ -110,7 +109,7 @@ function display(){
     let list=document.querySelector("#list");
     let contactList="";
     let i=0;
-    contacts.forEach((contact)=>{
+    obj.contacts.forEach((contact)=>{
         contactList += `<div class=list-item onclick="displayDetails(${i})" id="user${i}">
         <div class="item-name">${contact.name}</div>
         ${contact.email!=null && contact.email!="" ? "<div class='item-email'>"+ "Email: " + contact.email+"</div>" : ""}
@@ -142,12 +141,12 @@ function render(){
         $("#editButton").css("display", "block");
         $("#addButton").css("display", "none");
         $(".form-wrapper").show();
-        $('#name').val(contacts[counter].name);
-        $('#email').val(contacts[counter].email);
-        $('#mobile').val(contacts[counter].mobile);
-        $('#landline').val(contacts[counter].landline);
-        $('#website').val(contacts[counter].website);
-        $('#address').val(contacts[counter].address);
+        $('#name').val(obj.contacts[counter].name);
+        $('#email').val(obj.contacts[counter].email);
+        $('#mobile').val(obj.contacts[counter].mobile);
+        $('#landline').val(obj.contacts[counter].landline);
+        $('#website').val(obj.contacts[counter].website);
+        $('#address').val(obj.contacts[counter].address);
         
     }
     else{
@@ -158,25 +157,25 @@ function render(){
 const displayDetails=(i:number)=>{
     counter=i;
     $(`#user${i}`).addClass("selected-item");
-    for(let j=0;j<contacts.length;j++)
+    for(let j=0;j<obj.contacts.length;j++)
     {
         if(i!==j)
         {
             $(`#user${j}`).removeClass("selected-item");
         }
     }
-    if (contacts==null || contacts.length==0){
+    if (obj.contacts==null || obj.contacts.length==0){
         $('.detailed-contact').hide();
     }
     else{
         $(".form-wrapper").hide();
         $('.detailed-contact').css("display","block");
-        $('.detailed-name').text(contacts[i].name!=null && contacts[i].name!="" ? contacts[i].name : "N/A");
-        $('.email').text(contacts[i].email!=null && contacts[i].email!="" ? contacts[i].email : "N/A");
-        $('.mobile').text(contacts[i].mobile);
-        $('.landline').text(contacts[i].landline!=null && contacts[i].landline!="" ? contacts[i].landline : "N/A");
-        $('.website').text(contacts[i].website!=null && contacts[i].website!="" ? contacts[i].website : "N/A");
-        $('.contact-address').text(contacts[i].address!=null && contacts[i].address!="" ? contacts[i].address : "N/A");
+        $('.detailed-name').text(obj.contacts[i].name!=null && obj.contacts[i].name!="" ? obj.contacts[i].name : "N/A");
+        $('.email').text(obj.contacts[i].email!=null && obj.contacts[i].email!="" ? obj.contacts[i].email : "N/A");
+        $('.mobile').text(obj.contacts[i].mobile);
+        $('.landline').text(obj.contacts[i].landline!=null && obj.contacts[i].landline!="" ? obj.contacts[i].landline : "N/A");
+        $('.website').text(obj.contacts[i].website!=null && obj.contacts[i].website!="" ? obj.contacts[i].website : "N/A");
+        $('.contact-address').text(obj.contacts[i].address!=null && obj.contacts[i].address!="" ? obj.contacts[i].address : "N/A");
     }
 }
 

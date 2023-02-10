@@ -1,23 +1,23 @@
 import { IContacts } from "./model";
 import { counter } from "./home";
-export let contacts:IContacts[]=[];
+
 export class AddressBookService{
-    
+    contacts:IContacts[]=[];
     AddressBookService(){
         let contactsString=localStorage.getItem("contacts");
         if(contactsString!=null)
         {
-            contacts=JSON.parse(contactsString);
+            this.contacts=JSON.parse(contactsString);
         }
-        if(contacts==null){
-            contacts=[];
-            localStorage.setItem("contacts",JSON.stringify(contacts));
+        if(this.contacts==null){
+            this.contacts=[];
+            localStorage.setItem("contacts",JSON.stringify(this.contacts));
         }
     }
     addContact(contact:IContacts){
-        contacts.push(contact);
+        this.contacts.push(contact);
     }
     updateContact(contact:IContacts){
-        contacts[counter]=contact;
+        this.contacts[counter]=contact;
     }
 }

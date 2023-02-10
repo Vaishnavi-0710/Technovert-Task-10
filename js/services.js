@@ -1,24 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AddressBookService = exports.contacts = void 0;
+exports.AddressBookService = void 0;
 const home_1 = require("./home");
-exports.contacts = [];
 class AddressBookService {
+    constructor() {
+        this.contacts = [];
+    }
     AddressBookService() {
         let contactsString = localStorage.getItem("contacts");
         if (contactsString != null) {
-            exports.contacts = JSON.parse(contactsString);
+            this.contacts = JSON.parse(contactsString);
         }
-        if (exports.contacts == null) {
-            exports.contacts = [];
-            localStorage.setItem("contacts", JSON.stringify(exports.contacts));
+        if (this.contacts == null) {
+            this.contacts = [];
+            localStorage.setItem("contacts", JSON.stringify(this.contacts));
         }
     }
     addContact(contact) {
-        exports.contacts.push(contact);
+        this.contacts.push(contact);
     }
     updateContact(contact) {
-        exports.contacts[home_1.counter] = contact;
+        this.contacts[home_1.counter] = contact;
     }
 }
 exports.AddressBookService = AddressBookService;
