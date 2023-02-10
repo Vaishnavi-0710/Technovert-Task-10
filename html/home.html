@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Homepage</title>
+        <link rel="stylesheet" href="../css/home.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../js/home.js" defer></script>
+    </head>
+    <body>
+        <div class="heading">
+            <h1 class="main-heading">Address Book</h1>
+        </div>
+        <div class="navbar">
+            <div class="navbar-list">
+                <ul class="nav-list">
+                    <li class="nav-item"><a><b>HOME</b></a></li>
+                    <li class="nav-item" id="add"><a><b>+ADD</b></a></li>
+                </ul>
+            </div>
+            <div class="icon"><img src="../images/blog-icon.png" alt="icon not found"></div>
+        </div>
+        <div class="body">
+            <div class="contacts">
+                <div class="contacts-heading"><b>CONTACTS</b></div>
+                <div id="list"></div>
+            </div>
+            <div class="form-wrapper">
+            <div class="popup-form" id="">
+                <form id="formDetails">
+                    <div class="item">
+                        <div class="cell"><label for="name" aria-describedby="required-description">Name</label>
+                            <span aria-hidden="true" class="required">*</span>
+                        </div>
+                        <div class="cell"><input type="text" id="name" name="name" placeholder="Enter your name">
+                            <span id="nameError" class="error-msg"></span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="cell"><label for="email">Email</label></div>
+                        <div class="cell"><input type="email" id="email" name="email" placeholder="Enter your email">
+                            <span id="emailError" class="error-msg"></span>
+                        </div>
+                    </div>
+                    <div class="item section mob-number">
+                        <div class="sub-item phone-number">
+                            <div class="cell"><label for="mobile" aria-describedby="required-description">Mobile</label>
+                                <span aria-hidden="true" class="required">*</span>
+                            </div>
+                            <div class="cell"><input type="text" id="mobile" name="mobile" placeholder="Enter your mobile">
+                                <span id="mobileError" class="error-msg"></span>
+                            </div>
+                        </div>
+                        <div class="sub-item phone-number">
+                            <div class="cell"><label for="landline">Landline</label></div>
+                            <div class="cell"><input type="text" id="landline" name="landline" placeholder="Enter your landline">
+                                <span id="landlineError" class="error-msg"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="cell"><label for="website">Website</label></div>
+                        <div class="cell"><input type="text" id="website" name="website" placeholder="Enter the website"></div>
+                    </div>
+                    <div class="item">
+                        <div class="cell"><label for="address">Address</label></div>
+                        <div class="cell"><textarea id="address" class="address" name="address" placeholder="Enter your address"></textarea></div>
+                    </div>
+                    <div><input type="button" id="cancelButton" class="button" value="Cancel"></div>
+                    <div><input type="button" id="addButton" class="button" value="Save"></div>
+                    <div><input type="button" id="editButton" class="button" value="Save"></div>
+                </form>
+            </div>
+            </div>
+            <div class="detailed-contact">
+                <div class="container">
+                    <div class="name"><h1 class="detailed-name"></h1></div>
+                    <div class="modify">
+                        <div class="modify-items"><img class="edit-icon" src="../images/edit1.jpg"></div>
+                        <div class="modify-items"><a class="edit" id="edit">EDIT</a></div>
+                    </div>
+                    <div class="modify">
+                        <div class="modify-items"><img class="delete-icon" src="../images/delete2.png"></div>
+                        <div class="modify-items"><a class="delete" id="delete">DELETE</a></div>
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="detailed"><b>Email: </b><div class="email"></div></div>
+                    <div class="detailed"><b>Mobile: </b><div class="mobile"></div></div>
+                    <div class="detailed"><b>Landline: </b><div class="landline"></div></div>
+                    <div class="detailed"><b>Website: </b><div class="website"></div></div>
+                    <div class="detailed"><b>Address:  </b><div class="contact-address"></div></div>
+                </div>   
+            </div>
+        </div>
+    </body>
+</html>

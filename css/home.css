@@ -1,0 +1,253 @@
+body{
+    margin:0;
+    width:100%;
+}
+.heading{
+    background-color: #3399cc;
+    padding:1px;
+}
+.main-heading{
+    font-family: "Century Gothic";
+    font-size: 45px;
+    color:white;
+    font-weight: 100;
+    margin-left: 30px;
+}
+.navbar{
+    display: flex;
+    flex-direction: row;
+    background-color: #333333;
+    width: 100%;
+}
+.nav-list{
+    font-family:Calibri;
+    list-style-type: none;
+    display:flex;
+    align-items: center;
+    margin: 0;
+    padding-left: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+}
+.nav-item{
+    margin-left: 15px;
+}
+.icon{
+    align-items: center;
+    margin-left: auto;
+    padding: 5px;
+    padding-right: 40px;
+    width:25px;
+    height:25px;
+}
+.nav-item a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    text-decoration: none;
+}
+.body{
+    padding: 30px 0px 0px 20px;
+    display: flex;
+    margin: 0;
+}
+.contacts{
+    padding: 0px 0px 0px 40px;
+}
+.contact-heading{
+    font-family: "Gadugi";
+    color: #323232;
+    font-weight: bolder;
+    text-shadow: 0px 0px 0.8px;
+    font-size: 20px;
+    margin: 0px 0px 0px 50px;
+}
+#list{
+    padding: 10px 0px 0px 0px;
+    height:400px;
+    overflow-y: auto;
+}
+.list-item{
+    display: block;
+    border: 1px solid silver;
+    width:350px;
+    align-items:center ;
+}
+.list-item:hover,.selected-item{
+    background-color: #cee7f2;
+    cursor: pointer;
+}
+.item-name{
+    font-family: "Gadugi";
+    color: #363636;
+    font-size: 25px;
+    padding:5px 0px 0px 10px;
+}
+.item-email{
+    font-family: "Gadugi";
+    color: #363636;
+    padding:2px 0px 0px 12px;
+    font-size: 16px;
+}
+.item-phnno{
+    font-family: "Gadugi";
+    color: #363636;
+    padding:0px 0px 5px 12px;
+    font-size: 16px;
+}
+form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0px 0px 0px 10px;
+}
+.section:nth-child(1), .section:nth-child(2){
+    width:50%;
+}
+.item{
+    text-align: left;
+    width: 100%;
+}
+.cell{
+    padding:0px 0px 5px 0px;
+    width:92%;
+}
+.mob-number {
+    display: flex;
+    justify-content: space-between;
+}
+label{
+    font-weight: bold;
+    font-family: "Arial";
+    color: #1B1B1B;
+    font-size: 13px;
+    width:300px;
+}
+input{
+    height: 35px;
+    border: 2px solid #919191;
+    font-family: 'Arial';
+    font-size: 15px;
+    width: 100%;
+}
+.address{
+    width:100%;
+    height:70px;
+    border: 2px solid #919191;
+    font-family: 'Arial';
+    font-size: 15px;
+}
+.popup-form{
+    width: 600px;
+    height: 550px;
+    margin-top: 80px;
+    background: white;
+    display: block;
+    position:relative;
+    left:500px;
+    box-shadow: 0px 0px 25px;
+}
+.form-wrapper{
+    width:100%;
+    height:120%;
+    background: transparent;
+    z-index: 3;
+    top: 120px;
+    display: none;
+    position: absolute;
+    left:0;
+}
+#addButton{
+    height: 40px;
+    width:100px;
+    background-color: #468c00;
+    border-width: 0px;
+    color: white;
+    font-size: 18px;
+    margin: 0px 0px 0px 260px;
+}
+#editButton{
+    height: 40px;
+    width:100px;
+    background-color: #468c00;
+    border-width: 0px;
+    color: white;
+    font-size: 18px;
+    margin: 0px 30px 0px 0px;
+}
+#cancelButton{
+    height: 40px;
+    width:100px;
+    background-color: #468c00;
+    border-width: 0px;
+    color: white;
+    font-size: 18px;
+    margin: 0px;
+}
+#formDetails{
+    padding: 40px 20px 0px 40px;
+}
+.phone-number {
+    width: 50%;
+    margin-right: 30px;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: stretch;
+}
+span,.required{
+    color:red;
+}
+
+.detailed-contact{
+    display: none;
+}
+.items{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px 0px 0px 120px;
+    font-family: 'Leelawadee UI';
+    font-size: 13px;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 0px 0px 120px;
+    font-family: 'Leelawadee UI';
+    font-size: 13px;
+}
+.name{
+    width:400px;
+}
+.modify{
+    display: flex;
+    flex-direction: row;
+    padding: 30px 30px 0px 0px;
+    font-family: 'Leelawadee UI';
+    font-size: 15px;
+}
+.detailed{
+    display: flex;
+    font-size: 17px;
+    margin-top: 15px;
+}
+.edit-icon{
+    width: 15px;
+    height: 15px;
+    margin: auto;
+}
+.delete-icon{
+    width: 20px;
+    height: 25px;
+    margin: auto;
+}
+.edit, .delete{
+    margin-left: 5px;
+}
+.email,.mobile,.website,.contact-address,.landline{
+    padding: 0px 0px 0px 10px;
+}
