@@ -1,18 +1,11 @@
+import { IContacts } from "./model";
+import { AddressBookService } from "./services";
+import {contacts} from "./services" ;
 let mode:string;
-let contacts:IContacts[]=[];
-let counter=0;
+
+export let counter=0;
 let contactList:string;
-function storage(){
-    let contact=localStorage.getItem("contacts");
-    if(contact!=null)
-    {
-        contacts=JSON.parse(contact);
-    }
-    if(contacts==null){
-        contacts=[];
-        localStorage.setItem("contacts",JSON.stringify(contacts));
-    }
-}
+let obj= new AddressBookService();
 
 function contactNotNull(){
     if(contacts!=null){
@@ -20,7 +13,7 @@ function contactNotNull(){
     }
 }
 $(document).ready(function(){
-    storage();
+    obj.AddressBookService();
     display();
     contactNotNull();
     $("#add").click(function(e){
@@ -38,7 +31,7 @@ $(document).ready(function(){
         $(".error-msg").show();
         if((name && email && mobile && landline) ){
             if(confirm("Are you sure you want to add the contact?")==true){
-                contacts.push({
+                obj.addContact({
                     name: <string>$('#name').val(),
                     email: <string>$('#email').val(),
                     mobile: <string>$('#mobile').val(),
@@ -46,6 +39,7 @@ $(document).ready(function(){
                     website: <string>$('#website').val(),
                     address: <string>$('#address').val()
                 });
+
             };
             localStorage.setItem('contacts', JSON. stringify(contacts));
             display();
@@ -65,14 +59,14 @@ $(document).ready(function(){
         $(".error-msg").show();
         if((name && email && mobile && landline) ){
             if(confirm("Are you sure you want to update the data?")==true){
-                contacts[counter]={
+                obj.updateContact({
                     name: <string>$('#name').val(),
                     email: <string>$('#email').val(),
                     mobile: <string>$("#mobile").val(),
                     landline: <string>$('#landline').val(),
                     website: <string>$('#website').val(),
                     address: <string>$('#address').val()
-                }
+                });
                 $(".form-wrapper").hide();
                 localStorage.setItem('contacts', JSON.stringify(contacts));
                 display();
@@ -102,7 +96,7 @@ $(document).ready(function(){
             contacts.splice(counter,1);
             $('.detailed-contact').css("display","none");
             localStorage.setItem('contacts', JSON.stringify(contacts));
-            storage();
+            obj.AddressBookService();
             display();
             if(contacts!=null){
                 displayDetails(counter-counter);

@@ -1,4 +1,4 @@
-interface IContacts{
+export interface IContacts{
     name:string;
     email:string;
     mobile:string;
@@ -6,3 +6,4 @@ interface IContacts{
     website:string;
     address:string;
 }
+
