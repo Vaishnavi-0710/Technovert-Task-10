@@ -1,7 +1,7 @@
 "use strict";
 var _a, _b, _c, _d, _e, _f;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.counter = void 0;
+exports.displayDetails = exports.display = exports.counter = void 0;
 const services_1 = require("./services");
 let mode;
 exports.counter = 0;
@@ -12,7 +12,7 @@ function contactNotNull() {
         displayDetails(exports.counter);
     }
 }
-obj.AddressBookService();
+obj.init();
 display();
 contactNotNull();
 (_a = document.getElementById("add")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", (e) => {
@@ -30,6 +30,7 @@ contactNotNull();
     if ((name && email && mobile && landline)) {
         if (confirm("Are you sure you want to add the contact?") == true) {
             obj.addContact({
+                id: new Date().getTime().toString(),
                 name: document.querySelector('#name').value,
                 email: document.querySelector('#email').value,
                 mobile: document.querySelector('#mobile').value,
@@ -58,6 +59,7 @@ contactNotNull();
     if ((name && email && mobile && landline)) {
         if (confirm("Are you sure you want to update the data?") == true) {
             obj.updateContact({
+                id: new Date().getTime().toString(),
                 name: document.querySelector('#name').value,
                 email: document.querySelector('#email').value,
                 mobile: document.querySelector('#mobile').value,
@@ -91,24 +93,22 @@ contactNotNull();
         obj.contacts.splice(exports.counter, 1);
         $('.detailed-contact').css("display", "none");
         localStorage.setItem('contacts', JSON.stringify(obj.contacts));
-        obj.AddressBookService();
+        obj.init();
         display();
         if (obj.contacts != null) {
-            displayDetails(exports.counter - exports.counter);
+            obj.deleteContact();
         }
     }
 });
 function display() {
     let list = document.querySelector("#list");
     let contactList = "";
-    let i = 0;
     obj.contacts.forEach((contact) => {
-        contactList += `<div class=list-item onclick="displayDetails(${i})" id="user${i}">
+        contactList += `<div class=list-item  id="${contact.id}">
         <div class="item-name">${contact.name}</div>
         ${contact.email != null && contact.email != "" ? "<div class='item-email'>" + "Email: " + contact.email + "</div>" : ""}
         <div class="item-phnno">${"Mobile: " + contact.mobile}</div>
         </div>`;
-        i++;
     });
     if (contactList != "" && contactList != null) {
         contactList = "<div class=`list-container`>" + contactList + "</div>";
@@ -119,7 +119,15 @@ function display() {
         if (list != null)
             list.innerHTML = "There are no contacts to display";
     }
+    obj.contacts.forEach((contact, i) => {
+        var _a;
+        (_a = document.getElementById(`${contact.id}`)) === null || _a === void 0 ? void 0 : _a.addEventListener("click", (e) => {
+            e.preventDefault();
+            displayDetails(i);
+        });
+    });
 }
+exports.display = display;
 function render() {
     if (mode === "new") {
         $("#formDetails").trigger("reset");
@@ -145,12 +153,12 @@ function render() {
         display();
     }
 }
-const displayDetails = (i) => {
+function displayDetails(i) {
     exports.counter = i;
-    $(`#user${i}`).addClass("selected-item");
+    $(`#${obj.contacts[i].id}`).addClass("selected-item");
     for (let j = 0; j < obj.contacts.length; j++) {
         if (i !== j) {
-            $(`#user${j}`).removeClass("selected-item");
+            $(`#${obj.contacts[j].id}`).removeClass("selected-item");
         }
     }
     if (obj.contacts == null || obj.contacts.length == 0) {
@@ -166,7 +174,8 @@ const displayDetails = (i) => {
         $('.website').text(obj.contacts[i].website != null && obj.contacts[i].website != "" ? obj.contacts[i].website : "N/A");
         $('.contact-address').text(obj.contacts[i].address != null && obj.contacts[i].address != "" ? obj.contacts[i].address : "N/A");
     }
-};
+}
+exports.displayDetails = displayDetails;
 function validateName() {
     let name = $("#name").val();
     if (name != "") {

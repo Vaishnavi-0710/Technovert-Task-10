@@ -1,5 +1,6 @@
 import { IContacts } from "./model";
 import { AddressBookService } from "./services";
+
 let mode: string;
 
 export let counter = 0;
@@ -12,7 +13,7 @@ function contactNotNull() {
     }
 }
 
-obj.AddressBookService();
+obj.init();
 display();
 contactNotNull();
 document.getElementById("add")?.addEventListener("click", (e) => {
@@ -31,6 +32,7 @@ document.getElementById("addButton")?.addEventListener("click", (e) => {
     if((name && email && mobile && landline) ){
         if(confirm("Are you sure you want to add the contact?")==true){
             obj.addContact({
+                id: new Date().getTime().toString(),
                 name: (<HTMLInputElement>document.querySelector('#name')).value,
                 email: (<HTMLInputElement>document.querySelector('#email')).value,
                 mobile: (<HTMLInputElement>document.querySelector('#mobile')).value,
@@ -59,6 +61,7 @@ document.getElementById("editButton")?.addEventListener("click", (e) => {
     if((name && email && mobile && landline) ){
         if(confirm("Are you sure you want to update the data?")==true){
             obj.updateContact({
+                id: new Date().getTime().toString(),
                 name: (<HTMLInputElement>document.querySelector('#name')).value,
                 email: (<HTMLInputElement>document.querySelector('#email')).value,
                 mobile: (<HTMLInputElement>document.querySelector('#mobile')).value,
@@ -95,25 +98,25 @@ document.getElementById("delete")?.addEventListener("click", (e) => {
         obj.contacts.splice(counter,1);
         $('.detailed-contact').css("display","none");
         localStorage.setItem('contacts', JSON.stringify(obj.contacts));
-        obj.AddressBookService();
+        obj.init();
         display();
         if(obj.contacts!=null){
-            displayDetails(counter-counter);
+            obj.deleteContact();
         }
     }
 });
 
-function display(){
+export function display(){
     let list=document.querySelector("#list");
     let contactList="";
-    let i=0;
+    
     obj.contacts.forEach((contact)=>{
-        contactList += `<div class=list-item onclick="displayDetails(${i})" id="user${i}">
+        contactList += `<div class=list-item  id="${contact.id}">
         <div class="item-name">${contact.name}</div>
         ${contact.email!=null && contact.email!="" ? "<div class='item-email'>"+ "Email: " + contact.email+"</div>" : ""}
         <div class="item-phnno">${"Mobile: " + contact.mobile}</div>
         </div>`
-        i++;
+        
     });
     if(contactList!="" && contactList!=null){
         contactList="<div class=`list-container`>"+ contactList + "</div>";
@@ -122,7 +125,15 @@ function display(){
     else{
         if(list!=null)list.innerHTML= "There are no contacts to display";
     }
+    obj.contacts.forEach((contact,i)=>{
+        document.getElementById(`${contact.id}`)?.addEventListener("click", (e) => {
+            e.preventDefault();
+            displayDetails(i);
+        }); 
+    });
+        
 }
+
 
 
 function render(){
@@ -152,7 +163,7 @@ function render(){
     }
 }
 
-const displayDetails=(i:number)=>{
+export function displayDetails(i:number){
     counter=i;
     $(`#user${i}`).addClass("selected-item");
     for(let j=0;j<obj.contacts.length;j++)

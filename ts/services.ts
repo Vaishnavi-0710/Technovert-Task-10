@@ -1,9 +1,12 @@
 import { IContacts } from "./model";
-import { counter } from "./home";
+import { counter,display,displayDetails } from "./index";
 
 export class AddressBookService{
     contacts:IContacts[]=[];
-    AddressBookService(){
+    constructor(){
+        this.init();
+    }
+    init() {
         let contactsString=localStorage.getItem("contacts");
         if(contactsString!=null)
         {
@@ -19,5 +22,17 @@ export class AddressBookService{
     }
     updateContact(contact:IContacts){
         this.contacts[counter]=contact;
+    }
+    deleteContact(){
+        displayDetails(counter-counter);
+    }
+    getContactById(id:string){
+        let filteredContacts=this.contacts.filter((contact)=>{
+            contact.id==id;
+        });
+        if(filteredContacts.length>0){
+            return filteredContacts[0];
+        }
+        else{return null}
     }
 }
